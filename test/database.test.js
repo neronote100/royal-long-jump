@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {readFileSync} from 'node:fs';
+test('同名は自己ベストだけ更新し履歴を原子的に保存',()=>{const db=new DatabaseSync(':memory:');db.exec(readFileSync(new URL('../migrations/0001.sql',import.meta.url),'utf8'));const sql=db.prepare('INSERT INTO players VALUES(?,?,?) ON CONFLICT(name) DO UPDATE SET distance_cm=excluded.distance_cm,updated_at=excluded.updated_at WHERE excluded.distance_cm>players.distance_cm');sql.run('王子',12345,'2026-01-01');sql.run('王子',12345,'2026-01-02');sql.run('王子',12344,'2026-01-03');assert.equal(db.prepare('SELECT count(*) n FROM history').get().n,1);assert.equal(db.prepare('SELECT updated_at FROM players').get().updated_at,'2026-01-01');sql.run('王子',12346,'2026-01-04');assert.equal(db.prepare('SELECT count(*) n FROM history').get().n,2);const row=db.prepare('SELECT * FROM history ORDER BY id DESC LIMIT 1').get();assert.equal(row.previous_cm,12345);assert.equal(row.distance_cm,12346);assert.equal(row.updated_at,'2026-01-04');db.close();});

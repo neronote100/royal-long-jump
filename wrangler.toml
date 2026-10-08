@@ -1,0 +1,9 @@
+name = "royal-long-jump"
+compatibility_date = "2026-10-08"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "royal-long-jump"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
