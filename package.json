@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "npx wrangler pages dev public",
-    "test": "node test/core.test.js && node test/database.test.js",
+    "test": "node test/core.test.js && node test/database.test.js && node test/runner.test.js",
     "deploy": "npx wrangler pages deploy public --project-name royal-long-jump"
   }
 }

@@ -1,4 +1,6 @@
-export const TAKEOFF = 125;
+export const TAKEOFF = 260;
+export const TAKEOFF_START = TAKEOFF - 12;
+export const VIEW_SCALE = 18;
 export const GROUND = 410;
 export function flightStep(p, wind, angle, feather, dt) {
  const sail = angle / 4;
