@@ -5,5 +5,5 @@ pages_build_output_dir = "public"
 [[d1_databases]]
 binding = "DB"
 database_name = "royal-long-jump"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "0d498841-bdbf-40c8-91fd-e8704020e718"
 migrations_dir = "migrations"
